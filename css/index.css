@@ -113,3 +113,4 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+#logo-opr img{display: block; margin: 0 auto;}
