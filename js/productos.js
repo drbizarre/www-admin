@@ -37,10 +37,12 @@ var app = {
     },
     // Update DOM on a Received Event
     getProducts: function() {
+        
         $.getJSON( "http://api.ofertaspararegalar.com/productos", function( data ) {
             $.each( data.productos, function( i, item ) {
                $("#listado-productos").append('<li data-role="list-divider"><a href="#"><h2>'+item.nombre+'</h2><p>'+item.codigo+'</p></a></li>').listview('refresh');
             });
+       
         });          
     }
 };
