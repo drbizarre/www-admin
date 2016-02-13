@@ -41,6 +41,7 @@ var app = {
             $.each( data.gastos, function( i, item ) {
                $("#listado-gastos").append('<li data-role="list-divider"><a href="#"><h2>'+item.concepto+'</h2><p>'+item.monto+'</p></a></li>').listview('refresh');
             });
+            $("#cargando").hide();    
         });          
     }
 };

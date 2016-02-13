@@ -41,6 +41,7 @@ var app = {
             $.each( data.ventas, function( i, item ) {
                $("#listado-ventas").append('<li data-role="list-divider"><a href="#"><h2>'+item.cliente+'</h2><p>'+item.total+'</p></a></li>').listview('refresh');
             });
+            $("#cargando").hide();    
         });          
     }
 };

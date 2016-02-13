@@ -31,11 +31,10 @@
         <title>Ofertas para regalar</title>
     </head>
     <body>
-<!-- Start of first page: #one -->
-<div data-role="page" id="one">
-
-    <div data-role="header">
-            <h1>Productos</h1>
+    
+        <div data-role="header" style="overflow:hidden;">
+        <h1>Ofertas para regalar</h1>
+            
             <div data-role="navbar">
                 <ul>
                     <li><a rel="external" href="productos.html" class="ui-btn-active">Productos</a></li>
@@ -44,51 +43,19 @@
                 </ul>
             </div><!-- /navbar -->
 
-    </div><!-- /header -->
+        </div><!-- /header -->
 
-    <div data-role="content" >
-
-        <p><a data-role="button" href="index.html" rel="external">home</a></p>    
-        
+        <div data-role="header">
+            <!--div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+                <a href="#" class="ui-btn ui-btn-icon-right ui-icon-plus">Nuevo</a>
+            </div-->
+            <h6>Productos</h6>
+        </div>    
         <p id="cargando">cargando...</p>
         <ul id="listado-productos" data-role="listview" data-filter="true" data-split-icon="edit" data-split-theme="a" data-inset="true" data-filter-placeholder="Buscar producto..." >
-        </ul>            
-    </div><!-- /content -->
-    
-    <!--div data-role="footer" data-theme="d">
-        <h4>Page Footer</h4>
-    </div--><!-- /footer -->
-</div><!-- /page one -->
 
+        </ul>
 
-<!-- Start of second page: #two -->
-<div data-role="page" id="two" data-theme="a">
-
-    <div data-role="header">
-            <h1>Productos</h1>
-            <div data-role="navbar">
-                <ul>
-                    <li><a rel="external" href="productos.html" class="ui-btn-active">Productos</a></li>
-                    <li><a rel="external" href="ventas.html">Ventas</a></li>
-                    <li><a rel="external" href="gastos.html">Gastos</a></li>
-                </ul>
-            </div><!-- /navbar -->        
-    </div><!-- /header -->
-
-    <div data-role="content" data-theme="a">    
-        <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b">regresar a productos</a></p> 
-        <h2 id="nombre_producto"></h2>
-        <h4 id="codigo_producto"></h4>
-        <img id="foto_producto" src="">
-        
-        <p id="contenedorNuevaFoto"><a id="nuevaFoto" href="#" data-role="button" data-theme="b">nueva foto</a></p> 
-    </div><!-- /content -->
-    
-    
-</div><!-- /page two -->
-
-
-        
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
