@@ -114,3 +114,10 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 #logo-opr img{display: block; margin: 0 auto;}
+
+.list-view {    
+            height: 300px;
+            top: 20px;    
+            overflow: auto;   
+            -webkit-overflow-scrolling:touch;   
+           }

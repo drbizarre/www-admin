@@ -34,7 +34,7 @@
 <!-- Start of first page: #one -->
 <div data-role="page" id="one">
 
-    <div data-role="header">
+    <div data-role="header" data-position="fixed">
             <h1>Productos</h1>
             <div data-role="navbar">
                 <ul>
@@ -51,7 +51,7 @@
         <p><a data-role="button" href="index.html" rel="external">home</a></p>    
         
         <p id="cargando">cargando...</p>
-        <ul id="listado-productos" data-role="listview" data-filter="true" data-split-icon="edit" data-split-theme="a" data-inset="true" data-filter-placeholder="Buscar producto..." >
+        <ul id="listado-productos" class="list-view" data-role="listview" data-filter="true" data-split-icon="edit" data-split-theme="a" data-inset="true" data-filter-placeholder="Buscar producto..." >
         </ul>            
     </div><!-- /content -->
     
@@ -64,7 +64,7 @@
 <!-- Start of second page: #two -->
 <div data-role="page" id="two" data-theme="a">
 
-    <div data-role="header">
+    <div data-role="header" data-position="fixed">
             <h1>Productos</h1>
             <div data-role="navbar">
                 <ul>
@@ -77,11 +77,24 @@
 
     <div data-role="content" data-theme="a">    
         <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b">regresar a productos</a></p> 
+        <input type="hidden" id="producto_id" />
         <h2 id="nombre_producto"></h2>
         <h4 id="codigo_producto"></h4>
         <img id="foto_producto" src="">
         
         <p id="contenedorNuevaFoto"><a id="nuevaFoto" href="#" data-role="button" data-theme="b">nueva foto</a></p> 
+
+        <form>
+
+            <div id="actualizarFoto" class="ui-input-btn ui-btn ui-state-disabled">
+                <a id="boton_actualizadorts" data-role="button">Actualizar</a>
+            </div>
+            <div id="cancelarFoto" class="ui-input-btn ui-btn ui-state-disabled">
+                
+                <a id="boton_canceladorts" data-role="button">Cancelar</a>
+            </div>
+        </form>    
+
     </div><!-- /content -->
     
     

@@ -44,24 +44,67 @@ var app = {
             });
             $("#cargando").hide();    
         });      
-
     }
 };
 
 $('#contenedorNuevaFoto').delegate('#nuevaFoto', 'click', function () {
-   navigator.camera.getPicture(onSuccess, onFail, { quality: 50,    destinationType: Camera.DestinationType.DATA_URL});
+   navigator.camera.getPicture(onSuccess, onFail, { quality: 50,    destinationType: Camera.DestinationType.FILE_URI});
 });
 
+$('#actualizarFoto').delegate('#boton_actualizadorts', 'click', function () {
+  $("#boton_actualizadorts").html("Actualizando...");
+  var fileURL = $("#foto_producto").attr("src");  
+  var options = new FileUploadOptions();
+  options.fileKey = "takePictureField";
+  options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+  options.mimeType = "text/plain";
 
+  var params = {};
+  params.id = $("#producto_id").val();
+
+  options.params = params;
+
+  var ft = new FileTransfer();
+  ft.upload(fileURL, encodeURI("http://erp.ofertaspararegalar.com/productos/update_foto"), win, fail, options);
+});
+
+$('#cancelarFoto').delegate('#boton_canceladorts', 'click', function () {
+
+  navigator.camera.cleanup();
+  $("#producto_id").val();
+  $.mobile.changePage('#one', { transition: "flip"} );
+});
 
   $('#listado-productos').delegate('a.productdetail', 'click', function () {
         $("#codigo_producto").html($(this).data('codigo'));
         $("#nombre_producto").html($(this).data('nombre'));
         $("#foto_producto").attr("src","http://erp.ofertaspararegalar.com/media/"+$(this).data('foto'));
         $("#foto_producto").attr("width","100%");
+        $("#producto_id").val($(this).data('id'));
      });
   function cameraSuccess(){}
   function cameraError(){}
   function cameraOptions(){}
-  function onSuccess(imageData) {  var image = document.getElementById('foto_producto');  image.src = "data:image/jpeg;base64," + imageData;   $("#foto_producto").attr("width","100%");  }
-  function onFail(message) {   alert('Failed because: ' + message);}
+  function onSuccess(imageData) {  
+    var image = document.getElementById('foto_producto');  
+    image.src = imageData; /*image.src = "data:image/jpeg;base64," + imageData;*/   
+    $("#foto_producto").attr("width","100%");  
+    $("#actualizarFoto").removeClass("ui-state-disabled");
+    $("#cancelarFoto").removeClass("ui-state-disabled");
+  }
+  function onFail(message) {    //alert('Failed because: ' + message);  
+  }
+  var win = function (r) {
+    $("#boton_actualizadorts").html("Actualizar");
+    $("#actualizarFoto").addClass("ui-state-disabled");
+    $("#cancelarFoto").addClass("ui-state-disabled");
+    alert("Foto actualizada!");
+  }
+
+var fail = function (error) {
+    $("#boton_actualizadorts").html("Actualizar");
+    //alert("An error has occurred: Code = " + error.code);
+    alert("Error. no pudimos subir la imagen foto");
+    console.log("upload error source " + error.source);
+    console.log("upload error target " + error.target);
+}

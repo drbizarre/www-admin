@@ -52,7 +52,7 @@ var app = {
     states[Connection.CELL_4G]  = 'Cell 4G connection';
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
-    
+    if (states[networkState]=='No network connection') {
         navigator.notification.alert(
             'Coneccion tipo: '+states[networkState],  // message
             app.alertDismissed(),         // callback
@@ -60,6 +60,7 @@ var app = {
             'Ok'                  // buttonName
         );    
                 
+    }
         /*var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
