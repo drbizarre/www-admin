@@ -37,11 +37,23 @@ var app = {
     },
     // Update DOM on a Received Event
     getProducts: function() {
-        $.getJSON( "http://api.ofertaspararegalar.com/ventas", function( data ) {
-            $.each( data.ventas, function( i, item ) {
-               $("#listado-ventas").append('<li data-role="list-divider"><a href="#"><h2>'+item.cliente+'</h2><p>'+item.total+'</p></a></li>').listview('refresh');
+        $.getJSON( "http://api.ofertaspararegalar.com/productos", function( data ) {
+            $.each( data.productos, function( i, item ) {
+
+               $("#listado-productos").append('<li><a class="add2cart" href="#two" data-foto="'+item.foto+'" data-id="'+item.id+'" data-nombre="'+item.nombre+'" data-codigo="'+item.codigo+'"><img src="http://erp.ofertaspararegalar.com/media/thumbs/'+item.foto+'" /><h2>'+item.nombre+'</h2><p>'+item.codigo+'</p></a></li>').listview('refresh');
             });
             $("#cargando").hide();    
-        });          
+        });            
     }
 };
+
+$('#listado-productos').delegate('a.add2cart', 'click', function () {
+$("#listado-productos").listview('destroy');
+   // $("#listado-productos").filterable( "option", "filterReveal", true );
+    //alert($(this).data('codigo'));
+        /*$("#codigo_producto").html($(this).data('codigo'));
+        $("#nombre_producto").html($(this).data('nombre'));
+        $("#foto_producto").attr("src","http://erp.ofertaspararegalar.com/media/"+$(this).data('foto'));
+        $("#foto_producto").attr("width","100%");
+        $("#producto_id").val($(this).data('id'));*/
+});
