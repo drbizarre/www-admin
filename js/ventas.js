@@ -33,7 +33,11 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        alert("ASda");
         app.getProducts();
+        console.log("asdadsd");
+        sqlitePlugin.echoTest(successCallback, errorCallback);
+        alert("ASd");
     },
     // Update DOM on a Received Event
     getProducts: function() {
@@ -43,12 +47,23 @@ var app = {
                $("#listado-productos").append('<li><a class="add2cart" href="#two" data-foto="'+item.foto+'" data-id="'+item.id+'" data-nombre="'+item.nombre+'" data-codigo="'+item.codigo+'"><img src="http://erp.ofertaspararegalar.com/media/thumbs/'+item.foto+'" /><h2>'+item.nombre+'</h2><p>'+item.codigo+'</p></a></li>').listview('refresh');
             });
             $("#cargando").hide();    
+            
         });            
+    },
+    successCallback: function() {
+            alert("weboo");
+    },    
+    errorCallback: function() {
+        alert("naaa");
     }
 };
+ 
 
 $('#listado-productos').delegate('a.add2cart', 'click', function () {
-$("#listado-productos").listview('destroy');
+     $('#listado-productos li').each(function (index) {
+        $(this).addClass("ui-screen-hidden");
+    });
+//$("#listado-productos").listview('destroy');
    // $("#listado-productos").filterable( "option", "filterReveal", true );
     //alert($(this).data('codigo'));
         /*$("#codigo_producto").html($(this).data('codigo'));
