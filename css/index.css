@@ -121,3 +121,5 @@ h1 {
             overflow: auto;   
             -webkit-overflow-scrolling:touch;   
            }
+#msi_container{display: none;}
+#pagos_container{display: none;}

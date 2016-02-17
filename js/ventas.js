@@ -38,23 +38,8 @@ var app = {
         var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
         db.transaction(function (tx) {
             tx.executeSql('CREATE TABLE IF NOT EXISTS cart (id unique, product_id,code, qty, description, price)');
-            //tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "foobar")');
-            //tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")');
+            //tx.executeSql('CREATE TABLE IF NOT EXISTS client_information (id unique, product_id,code, qty, description, price)');
         });
-
-        /*db.transaction(function (tx) {
-           tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) {
-              var len = results.rows.length, i;
-              msg = "<p>Found rows: " + len + "</p>";
-              document.querySelector('#status').innerHTML +=  msg;
-            
-              for (i = 0; i < len; i++){
-                 alert(results.rows.item(i).log );
-              }
-            
-           }, null);
-        });*/
-
     },
     // Update DOM on a Received Event
     getProducts: function() {
@@ -97,13 +82,30 @@ $('#listado-productos').delegate('a.add2cart', 'click', function () {
     });
 });
 $('#datos_de_contacto').delegate('#boton_datos_de_contacto', 'click', function () {
-  $.mobile.changePage('#two', { transition: "flip"} );
+
+  $.mobile.changePage('#two', { transition: "slide"} );
 });
 $('#detalles_de_compra').delegate('#boton_detalles_de_compra', 'click', function () {
-  $.mobile.changePage('#three', { transition: "flip"} );
+  $.mobile.changePage('#three', { transition: "slide"} );
 });
 $('#grabar_compra').delegate('#boton_grabar_compra', 'click', function () {
   alert("grabando compra");
   //$.mobile.changePage('#three', { transition: "flip"} );
 });
-
+$("body").delegate( "#metodo", "change", function() {
+  if($(this).val()=="tarjeta"){
+    $("#msi_container").show();
+  }else{
+    $("#msi_container").hide();
+  }
+});
+$("body").delegate( "#pagos", "change", function() {
+  if($(this).val()>1){
+    $("#pagos_container").show();
+    for (var i = 1; i <= $(this).val(); i++) {
+      $("#pagos_container").append("<div class=\"hasDatepicker\"><input  class=\"hasDatepicker\" id=\"pago"+i+"\" name=\"pago"+i+"\" type=\"date\" data-inline=\"false\" placeholder=\"fecha del pago "+i+"\"></div>");
+    };
+  }else{
+    $("#pagos_container").hide().html("");
+  }
+});

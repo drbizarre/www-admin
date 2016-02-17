@@ -26,14 +26,14 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.datepicker.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.datepicker.theme.css" />
         <title>Ofertas para regalar</title>
     </head>
     <body>
         <div data-role="page" id="one">
-
                 <div data-role="header" data-position="fixed">
                 <h1>Ofertas para regalar</h1>
-                    
                     <div data-role="navbar">
                         <ul>
                             <li><a rel="external" href="productos.html">Productos</a></li>
@@ -41,11 +41,11 @@
                             <li><a rel="external" href="gastos.html">Gastos</a></li>
                         </ul>
                     </div><!-- /navbar -->
-
                 </div><!-- /header -->
 
                 
                 <div data-role="content" >
+
                     <p><a data-role="button" href="index.html" rel="external"  data-theme="b">ir a inicio</a></p>    
                     <p id="cargando">cargando...</p>
                     <ul id="listado-productos" data-filter-reveal="true" data-role="listview" data-filter="true" data-split-icon="edit" data-split-theme="a" data-inset="true" data-filter-placeholder="Buscar producto..." ></ul>
@@ -75,9 +75,9 @@
                             <h2>Datos de contacto</h2>
                             <label for="cliente">Cliente:</label><input type="text" value="" id="cliente" name="cliente" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
 
-                            <label for="telefono">Teléfono:</label><input type="text" value="" id="telefono" name="telefono" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                            <label for="telefono">Teléfono:</label><input type="tel" value="" id="telefono" name="telefono" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
 
-                            <label for="correo">Correo:</label><input type="text" value="" id="correo" name="correo" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                            <label for="correo">Correo:</label><input type="email" value="" id="correo" name="correo" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
                         </form>   
                         <div id="detalles_de_compra" class="ui-input-btn ui-btn"><a id="boton_detalles_de_compra" data-role="button" data-theme="b">Ir a detalles de compra</a></div>                    
                 </div>
@@ -101,20 +101,23 @@
                     <p><a href="#two" data-direction="reverse" data-role="button" data-theme="b">regresar al detalles de contacto</a></p> 
                         <form method="get" action="#">
                             <h2>Detalles de la compra</h2>
-                            <div class="ui-field-contain">
-                                <div class="ui-select">
-                                    <label for="metodo">Metodo de pago</label>
-                                    <div id="metodo-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow">
-                                        <select name="metodo" id="metodo">
-                                            <option value="efectivo">Efectivo</option>
-                                            <option value="despoito">Deposito</option>
-                                            <option value="tarjeta">Tarjeta</option>
-                                            <option value="na">N/A</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                            
+    
+                            <label for="metodo">Método de pago</label>
+                            <select name="metodo" id="metodo">
+                                <option value="efectivo">Efectivo</option>
+                                <option value="deposito">Deposito</option>
+                                <option value="tarjeta">Tarjeta</option>
+                                <option value="na">N/A</option>
+                            </select>
+
+                            <div id="msi_container">
+                            <label for="msi">MSI</label>
+                            <select id="msi" name="msi">
+                                <option value="0">0</option>
+                                <option value="3">3</option>
+                                <option value="6">6</option>
+                            </select>
+                            </div>
 
                             <label for="tipo">Tipo de venta</label>
                             <select name="tipo" id="tipo">
@@ -123,17 +126,22 @@
                                 <option value="apartado">Apartado</option>
                                 <option value="prestamo">Préstamo</option>
                             </select>
-                            <label for="telefono">Teléfono:</label><input type="text" value="" id="telefono" name="telefono" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-
-                            <label for="correo">Correo:</label><input type="text" value="" id="correo" name="correo" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-                            </div>                            
+                            <label for="pagos">En pagos:</label>
+                            <input type="number" pattern="[0-9]*" value="1" id="pagos" name="pagos">
+                            <div id="pagos_container">
+                            </div>
+                            <label for="descuento">Descuento:</label>
+                            <input type="number" pattern="[0-9]*" value="" id="descuento" name="descuento">
+                            <label for="envio">Envío:</label>
+                            <input type="number" pattern="[0-9]*" value="" id="envio" name="envio">                           
                         </form>   
                         <div id="grabar_compra" class="ui-input-btn ui-btn"><a id="boton_grabar_compra" data-role="button" data-theme="b">Grabar compra</a></div>                    
                 </div>
         </div>                
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.datepicker.js"></script>
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/ventas.js"></script>
