@@ -33,42 +33,77 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        alert("ASda");
+        
         app.getProducts();
-        console.log("asdadsd");
-        sqlitePlugin.echoTest(successCallback, errorCallback);
-        alert("ASd");
+        var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+        db.transaction(function (tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS cart (id unique, product_id,code, qty, description, price)');
+            //tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "foobar")');
+            //tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")');
+        });
+
+        /*db.transaction(function (tx) {
+           tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) {
+              var len = results.rows.length, i;
+              msg = "<p>Found rows: " + len + "</p>";
+              document.querySelector('#status').innerHTML +=  msg;
+            
+              for (i = 0; i < len; i++){
+                 alert(results.rows.item(i).log );
+              }
+            
+           }, null);
+        });*/
+
     },
     // Update DOM on a Received Event
     getProducts: function() {
         $.getJSON( "http://api.ofertaspararegalar.com/productos", function( data ) {
             $.each( data.productos, function( i, item ) {
-
-               $("#listado-productos").append('<li><a class="add2cart" href="#two" data-foto="'+item.foto+'" data-id="'+item.id+'" data-nombre="'+item.nombre+'" data-codigo="'+item.codigo+'"><img src="http://erp.ofertaspararegalar.com/media/thumbs/'+item.foto+'" /><h2>'+item.nombre+'</h2><p>'+item.codigo+'</p></a></li>').listview('refresh');
+               $("#listado-productos").append('<li><a class="add2cart" href="#two" data-precio="'+item.precio_venta_real+'" data-foto="'+item.foto+'" data-id="'+item.id+'" data-nombre="'+item.nombre+'" data-codigo="'+item.codigo+'"><img src="http://erp.ofertaspararegalar.com/media/thumbs/'+item.foto+'" /><h2>'+item.nombre+'</h2><p>'+item.codigo+'</p></a></li>').listview('refresh');
             });
             $("#cargando").hide();    
-            
-        });            
-    },
-    successCallback: function() {
-            alert("weboo");
-    },    
-    errorCallback: function() {
-        alert("naaa");
+        }); 
+        showCart();           
     }
+
 };
  
-
+function showCart(){
+    var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+    db.transaction(function (tx) {
+       tx.executeSql('SELECT * FROM cart', [], function (tx, results) {
+          var len = results.rows.length, i;
+          $("#products-in-cart").append("<thead><tr><th>Código</th><th>Descripción</th><th>Precio</th></tr></thead>");
+          var total = 0;
+          for (i = 0; i < len; i++){
+            total = total + results.rows.item(i).price;
+            $("#products-in-cart").append("<tbody><tr><td>"+results.rows.item(i).code+"</td><td>"+results.rows.item(i).description+"</td><td>"+results.rows.item(i).price+"</td></tr></tbody>");
+          }          
+          $("#products-in-cart").append("<tfoot><tr><td></td><td><strong>Total:</strong></td><td>"+total+"</td></tr></tfoot>");
+       }, null);
+    });
+}
 $('#listado-productos').delegate('a.add2cart', 'click', function () {
+     var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+     var sql ='INSERT INTO cart (product_id,code, qty,description,price) VALUES ('+$(this).data('id')+',"'+$(this).data('codigo')+'",1,"'+$(this).data('nombre')+'",'+$(this).data('precio')+')';        
+     db.transaction(function (tx) {
+        tx.executeSql(sql);
+        showCart();
+    });
+
      $('#listado-productos li').each(function (index) {
         $(this).addClass("ui-screen-hidden");
     });
-//$("#listado-productos").listview('destroy');
-   // $("#listado-productos").filterable( "option", "filterReveal", true );
-    //alert($(this).data('codigo'));
-        /*$("#codigo_producto").html($(this).data('codigo'));
-        $("#nombre_producto").html($(this).data('nombre'));
-        $("#foto_producto").attr("src","http://erp.ofertaspararegalar.com/media/"+$(this).data('foto'));
-        $("#foto_producto").attr("width","100%");
-        $("#producto_id").val($(this).data('id'));*/
 });
+$('#datos_de_contacto').delegate('#boton_datos_de_contacto', 'click', function () {
+  $.mobile.changePage('#two', { transition: "flip"} );
+});
+$('#detalles_de_compra').delegate('#boton_detalles_de_compra', 'click', function () {
+  $.mobile.changePage('#three', { transition: "flip"} );
+});
+$('#grabar_compra').delegate('#boton_grabar_compra', 'click', function () {
+  alert("grabando compra");
+  //$.mobile.changePage('#three', { transition: "flip"} );
+});
+

@@ -24,8 +24,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
         <title>Ofertas para regalar</title>
     </head>
     <body>
@@ -46,11 +46,91 @@
 
                 
                 <div data-role="content" >
-                    <p><a data-role="button" href="index.html" rel="external">home</a></p>    
+                    <p><a data-role="button" href="index.html" rel="external"  data-theme="b">ir a inicio</a></p>    
                     <p id="cargando">cargando...</p>
                     <ul id="listado-productos" data-filter-reveal="true" data-role="listview" data-filter="true" data-split-icon="edit" data-split-theme="a" data-inset="true" data-filter-placeholder="Buscar producto..." ></ul>
+                    <table data-role="table" id="products-in-cart" data-mode="reflow" class="ui-responsive">
+                    </table>
+                    <div id="datos_de_contacto" class="ui-input-btn ui-btn"><a id="boton_datos_de_contacto" data-role="button" data-theme="b">ir a datos de contacto</a></div>                    
                 </div>
         </div>
+        <div data-role="page" id="two">
+                <div data-role="header" data-position="fixed">
+                <h1>Ofertas para regalar</h1>
+                    
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a rel="external" href="productos.html">Productos</a></li>
+                            <li><a rel="external" href="ventas.html" class="ui-btn-active">Ventas</a></li>
+                            <li><a rel="external" href="gastos.html">Gastos</a></li>
+                        </ul>
+                    </div><!-- /navbar -->
+
+                </div><!-- /header -->
+
+                
+                <div data-role="content" >
+                    <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b">regresar al carrito</a></p> 
+                        <form method="get" action="#">
+                            <h2>Datos de contacto</h2>
+                            <label for="cliente">Cliente:</label><input type="text" value="" id="cliente" name="cliente" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+
+                            <label for="telefono">Teléfono:</label><input type="text" value="" id="telefono" name="telefono" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+
+                            <label for="correo">Correo:</label><input type="text" value="" id="correo" name="correo" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                        </form>   
+                        <div id="detalles_de_compra" class="ui-input-btn ui-btn"><a id="boton_detalles_de_compra" data-role="button" data-theme="b">Ir a detalles de compra</a></div>                    
+                </div>
+        </div> 
+        <div data-role="page" id="three">
+                <div data-role="header" data-position="fixed">
+                <h1>Ofertas para regalar</h1>
+                    
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a rel="external" href="productos.html">Productos</a></li>
+                            <li><a rel="external" href="ventas.html" class="ui-btn-active">Ventas</a></li>
+                            <li><a rel="external" href="gastos.html">Gastos</a></li>
+                        </ul>
+                    </div><!-- /navbar -->
+
+                </div><!-- /header -->
+
+                
+                <div data-role="content" >
+                    <p><a href="#two" data-direction="reverse" data-role="button" data-theme="b">regresar al detalles de contacto</a></p> 
+                        <form method="get" action="#">
+                            <h2>Detalles de la compra</h2>
+                            <div class="ui-field-contain">
+                                <div class="ui-select">
+                                    <label for="metodo">Metodo de pago</label>
+                                    <div id="metodo-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow">
+                                        <select name="metodo" id="metodo">
+                                            <option value="efectivo">Efectivo</option>
+                                            <option value="despoito">Deposito</option>
+                                            <option value="tarjeta">Tarjeta</option>
+                                            <option value="na">N/A</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            
+
+                            <label for="tipo">Tipo de venta</label>
+                            <select name="tipo" id="tipo">
+                                <option value="venta">Venta</option>
+                                <option value="credito">Crédito</option>
+                                <option value="apartado">Apartado</option>
+                                <option value="prestamo">Préstamo</option>
+                            </select>
+                            <label for="telefono">Teléfono:</label><input type="text" value="" id="telefono" name="telefono" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+
+                            <label for="correo">Correo:</label><input type="text" value="" id="correo" name="correo" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                            </div>                            
+                        </form>   
+                        <div id="grabar_compra" class="ui-input-btn ui-btn"><a id="boton_grabar_compra" data-role="button" data-theme="b">Grabar compra</a></div>                    
+                </div>
+        </div>                
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
