@@ -52,6 +52,7 @@
                     <table data-role="table" id="products-in-cart" data-mode="reflow" class="ui-responsive">
                     </table>
                     <div id="datos_de_contacto" class="ui-input-btn ui-btn"><a id="boton_datos_de_contacto" data-role="button" data-theme="b">ir a datos de contacto</a></div>                    
+                    <div id="borrar_datos_container" class="ui-input-btn ui-btn"><a id="boton_borrar_datos" data-role="button" data-theme="b">borrar datos de contacto</a></div>                    
                 </div>
         </div>
         <div data-role="page" id="two">
@@ -97,7 +98,7 @@
                 </div><!-- /header -->
 
                 
-                <div data-role="content" >
+                <div data-role="content">
                     <p><a href="#two" data-direction="reverse" data-role="button" data-theme="b">regresar al detalles de contacto</a></p> 
                         <form method="get" action="#">
                             <h2>Detalles de la compra</h2>
@@ -135,9 +136,40 @@
                             <label for="envio">Envío:</label>
                             <input type="number" pattern="[0-9]*" value="" id="envio" name="envio">                           
                         </form>   
-                        <div id="grabar_compra" class="ui-input-btn ui-btn"><a id="boton_grabar_compra" data-role="button" data-theme="b">Grabar compra</a></div>                    
+                        <div id="grabar_compra" class="ui-input-btn ui-btn"><a id="boton_grabar_compra" data-role="button" data-theme="b">Revisar compra</a></div>                    
                 </div>
-        </div>                
+        </div>    
+        <div data-role="page" id="four">
+                <div data-role="header" data-position="fixed">
+                <h1>Ofertas para regalar</h1>
+                    
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a rel="external" href="productos.html">Productos</a></li>
+                            <li><a rel="external" href="ventas.html" class="ui-btn-active">Ventas</a></li>
+                            <li><a rel="external" href="gastos.html">Gastos</a></li>
+                        </ul>
+                    </div><!-- /navbar -->
+
+                </div><!-- /header -->
+
+                
+                <div data-role="content" >
+                    <p><a href="#three" data-direction="reverse" data-role="button" data-theme="b">regresar al detalles de la compra</a></p> 
+                        <h2>Resumen de la compra</h2>
+                        <h4>Datos de contacto</h4>
+                        <ul>
+                            <li id="cliente"></li>
+                            <li id="correo"></li>
+                            <li id="telefono"></li>
+                        </ul>
+                        <h4>Productos comprados</h4>
+                    <table data-role="table" id="products-in-cart-review" data-mode="reflow" class="ui-responsive">
+                    </table>
+
+                        <div id="grabar_compra_in_cloud" class="ui-input-btn ui-btn"><a id="boton_grabar_compra_in_cloud" data-role="button" data-theme="b">Grabar compra</a></div>                    
+                </div>
+        </div>                           
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>

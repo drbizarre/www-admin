@@ -33,12 +33,17 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        
         app.getProducts();
-        var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+
+        var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
         db.transaction(function (tx) {
+
             tx.executeSql('CREATE TABLE IF NOT EXISTS cart (id unique, product_id,code, qty, description, price)');
-            //tx.executeSql('CREATE TABLE IF NOT EXISTS client_information (id unique, product_id,code, qty, description, price)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS sales (id,cliente, metodo, pagos, correo, telefono, subtotal, descuento, envio, pedido, msi)');
+            tx.executeSql('SELECT * FROM sales', [], function (tx2, results) {
+              var len = results.rows.length, i;
+              if (len==0) {tx.executeSql('INSERT INTO sales (id) VALUES (1)');};
+            }, null);            
         });
     },
     // Update DOM on a Received Event
@@ -55,7 +60,7 @@ var app = {
 };
  
 function showCart(){
-    var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+    var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
     db.transaction(function (tx) {
        tx.executeSql('SELECT * FROM cart', [], function (tx, results) {
           var len = results.rows.length, i;
@@ -69,8 +74,51 @@ function showCart(){
        }, null);
     });
 }
+
+function showContactInformation(){
+  
+       var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
+       db.transaction(function (tx) {
+         tx.executeSql('SELECT * FROM sales WHERE id = 1', [], function (tx, results) {
+          
+          var cliente = results.rows.item(0).cliente; $("#cliente").val(cliente);
+          var correo = results.rows.item(0).correo; $("#correo").val(correo);
+          var telefono = results.rows.item(0).telefono; $("#telefono").val(telefono);
+        }, null);
+       });
+}
+
+function reviewOrder(){
+       var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
+       db.transaction(function (tx) {
+          tx.executeSql('SELECT * FROM sales WHERE id = 1', [], function (tx, results) {
+            var cliente = results.rows.item(0).cliente; $("li#cliente").html("Cliente: "+cliente);
+            var correo = results.rows.item(0).correo; $("li#correo").html("Correo: "+correo);
+            var telefono = results.rows.item(0).telefono; $("li#telefono").html("Teléfono: "+telefono);
+          }, null);
+
+          tx.executeSql('SELECT * FROM cart', [], function (tx, results) {
+            var len = results.rows.length, i;
+            $("#products-in-cart-review").append("<thead><tr><th>Código</th><th>Descripción</th><th>Precio</th></tr></thead>");
+            var total = 0;
+            for (i = 0; i < len; i++){
+              total = total + results.rows.item(i).price;
+              $("#products-in-cart-review").append("<tbody><tr><td>"+results.rows.item(i).code+"</td><td>"+results.rows.item(i).description+"</td><td>"+results.rows.item(i).price+"</td></tr></tbody>");
+            }          
+            $("#products-in-cart-review").append("<tfoot><tr><td></td><td><strong>Subtotal:</strong></td><td>"+total+"</td></tr></tfoot>");
+          }, null);    
+
+          tx.executeSql('SELECT * FROM sales WHERE id = 1', [], function (tx, results) {
+            var cliente = results.rows.item(0).cliente; $("li#cliente").html("Cliente: "+cliente);
+            var correo = results.rows.item(0).correo; $("li#correo").html("Correo: "+correo);
+            var telefono = results.rows.item(0).telefono; $("li#telefono").html("Teléfono: "+telefono);
+          }, null);
+
+
+       });
+}
 $('#listado-productos').delegate('a.add2cart', 'click', function () {
-     var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+     var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
      var sql ='INSERT INTO cart (product_id,code, qty,description,price) VALUES ('+$(this).data('id')+',"'+$(this).data('codigo')+'",1,"'+$(this).data('nombre')+'",'+$(this).data('precio')+')';        
      db.transaction(function (tx) {
         tx.executeSql(sql);
@@ -81,16 +129,46 @@ $('#listado-productos').delegate('a.add2cart', 'click', function () {
         $(this).addClass("ui-screen-hidden");
     });
 });
-$('#datos_de_contacto').delegate('#boton_datos_de_contacto', 'click', function () {
 
+$('#datos_de_contacto').delegate('#boton_datos_de_contacto', 'click', function () {
+  showContactInformation();
   $.mobile.changePage('#two', { transition: "slide"} );
 });
+
 $('#detalles_de_compra').delegate('#boton_detalles_de_compra', 'click', function () {
+  var cliente  = $("#cliente").val();
+  var correo   = $("#correo").val();
+  var telefono = $("#telefono").val();
+        var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
+        db.transaction(function (tx) {
+            tx.executeSql('UPDATE sales SET cliente = "'+cliente+'",correo = "'+correo+'",telefono = "'+telefono+'" WHERE id = 1');
+        });
   $.mobile.changePage('#three', { transition: "slide"} );
 });
 $('#grabar_compra').delegate('#boton_grabar_compra', 'click', function () {
-  alert("grabando compra");
-  //$.mobile.changePage('#three', { transition: "flip"} );
+  var metodo    = $("#metodo").val();
+  var msi       = $("#msi").val();
+  var tipo      = $("#tipo").val();
+  var pagos     = $("#pagos").val();
+  var descuento = $("#descuento").val();
+  var envio     = $("#envio").val();
+  var subtotal = 0;
+  var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
+    db.transaction(function (tx) {
+       tx.executeSql('SELECT * FROM cart', [], function (tx, results) {
+          var len = results.rows.length, i;
+          for (i = 0; i < len; i++){
+            subtotal = subtotal + results.rows.item(i).price;
+          }          
+       }, null);
+       tx.executeSql('UPDATE sales SET metodo = "'+metodo+'",pagos = '+pagos+',subtotal = '+subtotal+', descuento ='+descuento+',envio='+envio+',pedido="'+pedido+'",msi='+msi+' WHERE id = 1');
+    });
+    reviewOrder();
+  $.mobile.changePage('#four', { transition: "slide"} );
+  
+    /*$.post( "http://erp.ofertaspararegalar.com/cotizacion/save_from_app", { subtotal: subtotal, cliente: "2pm" }).done(function( data ) {
+      alert( "Data Loaded: " + data );
+    });*/
 });
 $("body").delegate( "#metodo", "change", function() {
   if($(this).val()=="tarjeta"){
@@ -98,6 +176,14 @@ $("body").delegate( "#metodo", "change", function() {
   }else{
     $("#msi_container").hide();
   }
+});
+$("body").delegate( "#boton_borrar_datos", "click", function() {
+        var db = openDatabase('mydb', '1.0', 'Test DB', 10 * 1024 * 1024);
+        db.transaction(function (tx) {
+            tx.executeSql('DELETE FROM sales');
+            tx.executeSql('DROP TABLE sales');
+            tx.executeSql('DROP TABLE cart');
+        });
 });
 $("body").delegate( "#pagos", "change", function() {
   if($(this).val()>1){
