@@ -130,6 +130,12 @@
                             <label for="pagos">En pagos:</label>
                             <input type="number" pattern="[0-9]*" value="1" id="pagos" name="pagos">
                             <div id="pagos_container">
+                               <div id="lpago1"><label for="pago1">fecha pago 1</label><input id="pago1" name="pago1" type="date" data-inline="false"></div>
+                               <div id="lpago2"><label for="pago2">fecha pago 2</label><input id="pago2" name="pago2" type="date" data-inline="false"></div>
+                               <div id="lpago3"><label for="pago3">fecha pago 3</label><input id="pago3" name="pago3" type="date" data-inline="false"></div>
+                               <div id="lpago4"><label for="pago4">fecha pago 4</label><input id="pago4" name="pago4" type="date" data-inline="false"></div>
+                               <div id="lpago5"><label for="pago5">fecha pago 5</label><input id="pago5" name="pago5" type="date" data-inline="false"></div>
+                               <div id="lpago6"><label for="pago6">fecha pago 6</label><input id="pago6" name="pago6" type="date" data-inline="false"></div>
                             </div>
                             <label for="descuento">Descuento:</label>
                             <input type="number" pattern="[0-9]*" value="" id="descuento" name="descuento">
@@ -152,8 +158,6 @@
                     </div><!-- /navbar -->
 
                 </div><!-- /header -->
-
-                
                 <div data-role="content" >
                     <p><a href="#three" data-direction="reverse" data-role="button" data-theme="b">regresar al detalles de la compra</a></p> 
                         <h2>Resumen de la compra</h2>
@@ -166,10 +170,31 @@
                         <h4>Productos comprados</h4>
                     <table data-role="table" id="products-in-cart-review" data-mode="reflow" class="ui-responsive">
                     </table>
-
+                    <table data-role="table" id="other-charges-review" data-mode="reflow" class="ui-responsive">
+                    </table>
+                    <table data-role="table" id="grand-total" data-mode="reflow" class="ui-responsive">
+                    </table>
                         <div id="grabar_compra_in_cloud" class="ui-input-btn ui-btn"><a id="boton_grabar_compra_in_cloud" data-role="button" data-theme="b">Grabar compra</a></div>                    
                 </div>
-        </div>                           
+        </div>
+        <div data-role="page" id="five">
+                <div data-role="header" data-position="fixed">
+                <h1>Ofertas para regalar</h1>
+                    
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a rel="external" href="productos.html">Productos</a></li>
+                            <li><a rel="external" href="ventas.html" class="ui-btn-active">Ventas</a></li>
+                            <li><a rel="external" href="gastos.html">Gastos</a></li>
+                        </ul>
+                    </div><!-- /navbar -->
+
+                </div><!-- /header -->
+                <div data-role="content" >
+                    <h2>Compra exitosa</h2>
+                    <a rel="external" href="ventas.html" class="ui-btn-active">Regresar a Ventas</a>
+                </div>
+        </div> 
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>

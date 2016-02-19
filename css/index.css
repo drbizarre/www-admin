@@ -122,4 +122,16 @@ h1 {
             -webkit-overflow-scrolling:touch;   
            }
 #msi_container{display: none;}
-#pagos_container{display: none;}
+/*#pagos_container{display: none;}*/
+#pago2{display: none;}
+#pago3{display: none;}
+#pago4{display: none;}
+#pago5{display: none;}
+#pago6{display: none;}
+
+#lpago2{display: none;}
+#lpago3{display: none;}
+#lpago4{display: none;}
+#lpago5{display: none;}
+#lpago6{display: none;}
+
