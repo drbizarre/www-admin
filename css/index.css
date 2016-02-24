@@ -113,7 +113,7 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
-#logo-opr img{display: block; margin: 0 auto;}
+#logo-opr img{display: block; margin: 20px auto;}
 
 .list-view {    
             height: 300px;
@@ -135,3 +135,8 @@ h1 {
 #lpago5{display: none;}
 #lpago6{display: none;}
 
+#main-page{padding-top:10%; background: #d9edf7;}
+.menuiconizable{ margin: 0 auto; text-align: center; margin-left: 20px;}
+.menuiconizable img{ vertical-align: middle; margin:0 auto;}
+
+#detalles-compra{display: none;}

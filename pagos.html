@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css" />
+        
+        
+        <title>Ofertas para regalar</title>
+    </head>
+    <body>
+                <div data-role="header" data-position="fixed" data-add-back-btn="true">
+                <h1>Ofertas para regalar</h1>
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a rel="external" href="productos.html">Productos</a></li>
+                            <li><a rel="external" href="ventas.html">Ventas</a></li>
+                            <li><a rel="external" href="pagos.html" class="ui-btn-active">Pagos</a></li>
+                        </ul>
+                    </div><!-- /navbar -->
+                </div><!-- /header -->
+
+ <div data-role="content" >
+        <p><a data-role="button" href="index.html" rel="external"  data-theme="b">ir a inicio</a></p>    
+        <p id="cargando">cargando...</p>
+<ul id="listado-ventas" data-filter-reveal="true" data-role="listview" data-filter="true" data-split-icon="edit" data-split-theme="a" data-inset="true" data-filter-placeholder="Buscar venta..." ></ul>
+    <form method="get" action="#">
+
+<div id="detalles-compra" class="ui-corner-all custom-corners">
+  <div class="ui-bar ui-bar-a">
+    <h3>Detalles de la compra</h3>
+  </div>
+  <div class="ui-body ui-body-a">
+        <p id="cliente"></p>
+        <p id="total"></p>
+        <p id="fechat"></p>
+  </div>
+  <div class="ui-bar ui-bar-a">
+    <h3>Nuevo pago</h3>
+  </div>
+  <div class="ui-body ui-body-a">
+        <input type="hidden" id="id_compra" name="id_compra">
+        <label for="fecha">Fecha</label>
+        <input id="fecha" name="fecha" type="date" data-inline="false">
+        <label for="monto">Monto:</label>
+        <input type="number" pattern="[0-9]*" value="" id="monto" name="monto">
+  </div>
+    <div id="grabar_pago" class="ui-input-btn ui-btn"><a id="boton_grabar_pago" data-role="button" data-theme="b">Grabar pago</a></div>
+</div>        
+
+    </form>   
+                        
+</div>
+</div>
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/pagos.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

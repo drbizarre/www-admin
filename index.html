@@ -30,18 +30,28 @@
     </head>
 
     <body>
-    <div data-role="page">
-        <div data-role="header" data-position="fixed">
+    <div id="main-page" data-role="page">
+        <!--div data-role="header" data-position="fixed">
                 <h1>Ofertas para regalar</h1>
-        </div><!-- /header -->
+        </div--><!-- /header -->
 
         <div id="logo-opr"><img src="img/site.png"></div>
+    
+<div class="ui-grid-b">
+    <div class="ui-block-a"><div class="ui-bar ui-bar-a" >
+                    <a rel="external" href="productos.html"><img src="img/clothes.png"><br> Productos</a>
+        
+    </div></div>
+    <div class="ui-block-b"><div class="ui-bar ui-bar-a">
+               <a rel="external" href="ventas.html"><img src="img/shop.png"> <br> Ventas</a>
+    </div></div>
+    <div class="ui-block-c"><div class="ui-bar ui-bar-a" >
+        <a rel="external" href="pagos.html"><img src="img/commerce.png"><br>  Pagos</a>
+    </div></div>
+</div><!-- /grid-b -->
 
-        <ul data-role="listview" data-ajax="false" data-inset="false" data-theme="a">
-            <li><a rel="external" href="productos.html">Productos</a></li>
-            <li><a rel="external" href="ventas.html">Ventas</a></li>
-            <li><a rel="external" href="gastos.html">Gastos</a></li>
-        </ul>
+       
+        
     </div>
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>

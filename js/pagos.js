@@ -33,15 +33,35 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.getProducts();
+        app.getVentas();
     },
     // Update DOM on a Received Event
-    getProducts: function() {
-        $.getJSON( "http://api.ofertaspararegalar.com/gastos", function( data ) {
-            $.each( data.gastos, function( i, item ) {
-               $("#listado-gastos").append('<li data-role="list-divider"><a href="#"><h2>'+item.concepto+'</h2><p>'+item.monto+'</p></a></li>').listview('refresh');
+    getVentas: function() {
+        $.getJSON( "http://api.ofertaspararegalar.com/ventas", function( data ) {
+            $.each( data.ventas, function( i, item ) {
+               $("#listado-ventas").append('<li><a href="#" class="newPayment" data-cliente="'+item.cliente+'" data-total="'+item.total+'" data-fecha="'+item.fecha+'" data-id="'+item.id+'"><h2>'+item.cliente+'</h2><p>'+item.fecha+' - $'+item.total+'</p></a></li>').listview('refresh');
             });
             $("#cargando").hide();    
         });          
     }
 };
+$('body').delegate('a.newPayment', 'click', function () {
+     $("#detalles-compra").show();
+     $("#id_compra").val($(this).data('id'));
+     $("#cliente").html("Cliente:"+$(this).data('cliente'));
+     $("#total").html("Total: $"+$(this).data('total'));
+     $("#fechat").html("Fecha:"+$(this).data('fecha'));
+     $('#listado-ventas li').each(function (index) {
+        $(this).addClass("ui-screen-hidden");
+    });
+});
+$('#grabar_pago').delegate('#boton_grabar_pago', 'click', function () {
+    var id_compra = $("#id_compra").val();
+    var fecha = $("#fecha").val();
+    var monto = $("#monto").val();
+    $.post( "http://erp.ofertaspararegalar.com/cotizacion/nuevo_pago_app", { id_compra: id_compra, fecha: fecha, monto:monto }).done(function( data ) {
+        alert("Pago grabado");        
+        $("#fecha").val("");
+        $("#monto").val("");
+    });
+});
